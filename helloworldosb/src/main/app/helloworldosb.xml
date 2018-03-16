@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd">
+<mulexml:namespace-manager includeConfigNamespaces="true">
+<mulexml:namespace prefix="hel" uri="http://xmlns.oracle.com/ServiceBusApplication/SBProject/HelloWorldProxyService"/>
+</mulexml:namespace-manager>
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+    <cxf:configuration name="CXF_Configuration" enableMuleSoapHeaders="true" initializeStaticBusInstance="true" doc:name="CXF Configuration"/>
+    <flow name="helloworldosbFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/abc" doc:name="HTTP"/>
+        <cxf:proxy-service configuration-ref="CXF_Configuration" payload="body" doc:name="CXF" namespace="http://xmlns.oracle.com/ServiceBusApplication/SBProject/HelloWorldProxyService" port="helloPort" service="HelloWorldService" wsdlLocation="Hello1WorldProxyService.wsdl"/>
+        <logger message="hello" level="INFO" doc:name="Logger"/>
+    </flow>
+</mule>
