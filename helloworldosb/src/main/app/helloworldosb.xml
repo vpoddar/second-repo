@@ -18,5 +18,6 @@ http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/
         <http:listener config-ref="HTTP_Listener_Configuration" path="/abc" doc:name="HTTP"/>
         <cxf:proxy-service configuration-ref="CXF_Configuration" payload="body" doc:name="CXF" namespace="http://xmlns.oracle.com/ServiceBusApplication/SBProject/HelloWorldProxyService" port="helloPort" service="HelloWorldService" wsdlLocation="Hello1WorldProxyService.wsdl"/>
         <logger message="hello123456" level="INFO" doc:name="Logger"/>
+        <logger message="abc" level="INFO" doc:name="Logger1"/>
     </flow>
 </mule>
