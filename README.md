@@ -1,2 +1,2 @@
 # second-repo
-This is for everyone
+This is not for everyone
